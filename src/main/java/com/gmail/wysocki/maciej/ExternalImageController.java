@@ -1,5 +1,8 @@
 package com.gmail.wysocki.maciej;
 
+import java.awt.Image;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,20 +19,19 @@ public class ExternalImageController {
 	@Autowired
 	private ImageConverter converter;
 	@Autowired
-	private NeuralNetwork ai;
+	private CarLogoRecognizer recognizer;
 
     @RequestMapping(value = "recognize/{pictureUrl}", method = RequestMethod.GET)
-    public Answer recognize(@PathVariable String pictureUrl) {
+    public Answer recognize(@PathVariable String pictureUrl) throws IOException {
     	// validate image
     	validator.validate(pictureUrl);
     	
     	// download image
-    	byte[] image = downloader.download(pictureUrl);
+    	Image image = downloader.download(pictureUrl);
     	
     	// change to bitmap
-    	int[][] bitmap = converter.convertToBitmap(image);
+    	double[] pixelsLineNormalized = converter.convertToNormalized(image);
     	
-    	// invoke neural network and return an answer
-    	return ai.recognizeCarLogo(bitmap);
+    	return recognizer.recognizeCarLogo(pixelsLineNormalized);
     }
 }

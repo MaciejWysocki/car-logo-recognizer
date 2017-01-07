@@ -6,34 +6,51 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.neuroph.core.exceptions.VectorSizeMismatchException;
 
 public class NeuralNetworkTest {
 
-	private NeuralNetwork ai;
+	private static final Double MAX_ERROR = 0.1;
+	private static final Double MAX_NETWORK_LEARNING_ERROR = 0.02;
+	
+	private static CarLogoRecognizer ai;
+	private static ImageConverter converter;
 
-	@Before
-	public void setUp() {
-		ai = new NeuralNetwork();
+	@BeforeClass
+	public static void setUp() throws VectorSizeMismatchException, IOException, InterruptedException {
+		converter = new ImageConverter();
+		ai = new CarLogoRecognizer(MAX_NETWORK_LEARNING_ERROR);
+		ai.setConverter(converter);
+		ai.learn();
 	}
 
 	@Test
-	public void shouldRecognizeMazda() {
-		BufferedImage image = extracted("/mazda.jpg");
-		int height = image.getHeight();
-		int width = image.getWidth();
-		int[][] mazdaLogo = new int[width][height];
-		System.out.println("width: " + width + ", height: " + height);
+	public void shouldRecognizeMerc() throws IOException {
+		BufferedImage image = extracted("/merc.png");
+		double[] input = converter.convertToNormalized(image);
 
-		for (int i = 0; i < width; ++i) {
-			for (int j = 0; j < height; ++j) {
-				mazdaLogo[i][j] = image.getRGB(i, j);
-			}
-		}
+		Answer answer = ai.recognizeCarLogo(input);
+		Assert.assertArrayEquals(new double[]{1, 0, 0}, answer.getData(), MAX_ERROR);
+	}
+	
+	@Test
+	public void shouldRecognizeFord() throws IOException {
+		BufferedImage image = extracted("/ford.png");
+		double[] input = converter.convertToNormalized(image);
 
-		Answer answer = ai.recognizeCarLogo(mazdaLogo);
-		Assert.assertEquals("Mazda", answer.getAnswer());
+		Answer answer = ai.recognizeCarLogo(input);
+		Assert.assertArrayEquals(new double[]{0, 1, 0}, answer.getData(), MAX_ERROR);
+	}
+	
+	@Test
+	public void shouldRecognizeMazda() throws IOException {
+		BufferedImage image = extracted("/mazda.png");
+		double[] input = converter.convertToNormalized(image);
+
+		Answer answer = ai.recognizeCarLogo(input);
+		Assert.assertArrayEquals(new double[]{0, 0, 1}, answer.getData(), MAX_ERROR);
 	}
 
 	private BufferedImage extracted(String fileName) {

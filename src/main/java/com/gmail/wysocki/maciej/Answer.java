@@ -1,12 +1,22 @@
 package com.gmail.wysocki.maciej;
 
+import java.util.Arrays;
+
 public class Answer {
 
-	private static final String DEFAULT_ANSWER = "Nic mi to nie przypomina.";
-	private String answer = DEFAULT_ANSWER;
+	private double[] data;
 
-	public String getAnswer() {
-		return answer;
+	public Answer(double[] output) {
+		data = output;
+	}
+	
+	@Override
+	public String toString() {
+		return "Answer: " + Arrays.toString(data);
+	}
+	
+	public double[] getData() {
+		return data;
 	}
 
 }
