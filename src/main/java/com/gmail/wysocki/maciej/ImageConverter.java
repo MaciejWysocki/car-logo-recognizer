@@ -36,7 +36,7 @@ public class ImageConverter {
 			}
 		}
 
-//		dumpConverted(converted);
+		dumpConverted(converted);
 
 		return converted;
 	}
