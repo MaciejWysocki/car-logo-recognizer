@@ -1,0 +1,91 @@
+/*
+#e2dadb tlo
+#dae2df kolor 2
+#6d696a kolor 3
+#000000 rysunek
+#a2a7a5 rysunek 2
+#ffffff tlo rysunku
+*/
+
+html {
+    height: 100%;
+}
+
+body {
+	background:  
+        linear-gradient(-180deg, #e2dadb 10%, #a2a7a5 100%),
+        radial-gradient(50% 100%, #dae2df 10%, #6d696a 100%);
+	background-blend-mode: multiply;
+}
+
+div {
+	padding: 10px;
+}
+
+#main div {
+	float: left;
+}
+
+#main {
+	width: 1066px;
+	margin: 100px auto;
+	overflow: hidden;
+	background: 
+		radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,0.4) 21%, rgba(255,255,255,0.4) 34%, transparent 35%, transparent),
+		radial-gradient(circle at 0% 50%, transparent 20%, rgba(255,255,255,.4) 21%, rgba(255,255,255,.4) 34%, transparent 35%, transparent) 0 -50px;
+	background-color: #f6f3f4;
+	background-size:75px 100px;
+	border-top: 6px solid #fff;
+	border-bottom: 4px solid #6d696a;
+}
+
+#values {
+	width: 400px;
+	height: 400px;
+}
+
+#logos {
+	width: 56px;
+	margin-top: 7px;
+}
+
+#logos img {
+	width: 58px;
+	height: 58px;
+	margin: 12px 0;
+}
+
+#chart {
+	width: 300px;
+	height: 380px;
+}
+
+#marker {
+	width: 200px;
+	height: 400px;
+	text-align: right;
+}
+
+#marker img {
+	margin: 10px 30px 0 0;
+	cursor: grab;
+}
+
+#marker img:active {
+	cursor: grabbing;
+}
+
+#picture {
+	width: 400px;
+	height: 400px;
+	background: white;
+	cursor: crosshair;
+}
+
+#answer {
+	text-align: center;
+	color: #6d696a;
+	font-size: xx-large;
+	background: #dae2df;
+	width: 1044px;
+}

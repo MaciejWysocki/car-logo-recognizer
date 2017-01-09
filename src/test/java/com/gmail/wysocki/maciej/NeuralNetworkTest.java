@@ -21,8 +21,9 @@ public class NeuralNetworkTest {
 	@BeforeClass
 	public static void setUp() throws VectorSizeMismatchException, IOException, InterruptedException {
 		converter = new ImageConverter();
-		ai = new CarLogoRecognizer(MAX_NETWORK_LEARNING_ERROR);
+		ai = new CarLogoRecognizer();
 		ai.setConverter(converter);
+		ai.setMaxError(MAX_NETWORK_LEARNING_ERROR);
 		ai.learn();
 	}
 

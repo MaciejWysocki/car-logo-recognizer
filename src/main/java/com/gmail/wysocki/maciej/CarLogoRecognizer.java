@@ -26,17 +26,18 @@ public class CarLogoRecognizer {
 	
 	private static final int OUTPUT_SIZE = 4;
 	
+	private static final double DEFAULT_MAX_ERROR = 0.1;
+	
 	@Autowired
 	private ImageConverter converter;
 
 	private NeuralNetwork<BackPropagation> ai;
-	private double maxError;
 	
+	private double maxError;
 
-
-	public CarLogoRecognizer(double maxError) {
-		this.maxError = maxError;
+	public CarLogoRecognizer() {
 		ai = new MultiLayerPerceptron(TransferFunctionType.SIGMOID, ImageConverter.SIZE * ImageConverter.SIZE, 10, OUTPUT_SIZE);
+		maxError = DEFAULT_MAX_ERROR;
 	}
 
 	@PostConstruct
@@ -118,6 +119,10 @@ public class CarLogoRecognizer {
 
 	public void setConverter(ImageConverter converter) {
 		this.converter = converter;
+	}
+	
+	public void setMaxError(double maxError) {
+		this.maxError = maxError;
 	}
 
 }
