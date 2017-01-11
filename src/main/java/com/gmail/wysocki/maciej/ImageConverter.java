@@ -10,14 +10,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ImageConverter {
-
-	private static final Logger LOG = LoggerFactory.getLogger(ImageConverter.class);
 
 	public static final int SIZE = 16;
 
@@ -36,8 +32,7 @@ public class ImageConverter {
 			}
 		}
 
-		dumpConverted(converted);
-
+//		dumpConverted(converted);
 		return converted;
 	}
 

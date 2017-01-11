@@ -7,8 +7,6 @@ import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,12 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class ExternalImageController {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(ExternalImageController.class);
-	
-	@Autowired
-	private UrlValidator validator;
-	@Autowired
-	private ImageDownloader downloader;
 	@Autowired
 	private ImageConverter converter;
 	@Autowired
@@ -33,18 +25,11 @@ public class ExternalImageController {
 
     @RequestMapping(value = "recognize", method = RequestMethod.POST)
     public Answer recognize(@RequestBody String pictureBase64encoded) throws IOException {
-    	// validate image
-//    	validator.validate(pictureUrl);
-
-    	// download image
-//    	Image image = downloader.download(pictureUrl);
-//    	LOG.debug(pictureBase64encoded);
+    	// decode the image
     	byte[] decoded = Base64.getDecoder().decode(pictureBase64encoded.split(",")[1]);
-//    	Image image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
 		Image image = ImageIO.read(new ByteArrayInputStream(decoded));
-
-    	
-    	// change to bitmap
+	
+    	// change to 0-1 values where each number is one pixel
     	double[] pixelsLineNormalized = converter.convertToNormalized(image);
     	
     	return recognizer.recognizeCarLogo(pixelsLineNormalized);
