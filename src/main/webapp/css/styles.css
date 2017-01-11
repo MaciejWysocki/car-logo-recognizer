@@ -67,8 +67,12 @@ div {
 }
 
 #marker img {
-	margin: 10px 30px 0 0;
+	margin: 10px 20px 0 0;
 	cursor: grab;
+}
+
+#marker #tool-eraser {
+	margin: 10px 32px 0 0;
 }
 
 #marker img:active {
