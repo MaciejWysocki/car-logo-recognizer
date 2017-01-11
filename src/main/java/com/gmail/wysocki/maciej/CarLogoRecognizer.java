@@ -26,7 +26,7 @@ public class CarLogoRecognizer {
 	
 	private static final int OUTPUT_SIZE = 4;
 	
-	private static final double DEFAULT_MAX_ERROR = 0.1;
+	private static final double DEFAULT_MAX_ERROR = 0.01;
 	
 	@Autowired
 	private ImageConverter converter;
