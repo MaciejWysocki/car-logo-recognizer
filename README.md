@@ -4,6 +4,13 @@ Recognition of car logos by neural network.
 
 ![Car Logo Recognizer screenshot](https://raw.githubusercontent.com/MaciejWysocki/car-logo-recognizer/master/carlogorecognizer.png)
 
+# How to run
+```
+mvn install -Dmaven.test.skip
+java -jar target/car-logo-recognizer-1.0-SNAPSHOT.jar
+```
+Sometimes requires couple runs as learning process uses random weights and not always is able to learn properly.
+
 # Status
 
 Current version uses Neuroph library, can learn itself to distinguish between 4 predefined car logos.
