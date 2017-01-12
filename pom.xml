@@ -36,6 +36,10 @@
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-classic</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>
@@ -46,6 +50,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>1.4.3.RELEASE</version>
+			    <configuration>
+			        <mainClass>com.gmail.wysocki.maciej.Application</mainClass>
+			    </configuration>
 				<executions>
 					<execution>
 						<goals>

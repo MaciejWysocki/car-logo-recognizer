@@ -16,6 +16,16 @@ import org.springframework.stereotype.Component;
 public class ImageConverter {
 
 	public static final int SIZE = 16;
+	
+	private boolean dump;
+	
+	public ImageConverter() {
+		this.dump = true;
+	}
+	
+	public ImageConverter(boolean dump) {
+		this.dump = dump;
+	}
 
 	public double[] convertToNormalized(Image image) throws IOException {
 		double[] converted = new double[SIZE * SIZE];
@@ -32,7 +42,9 @@ public class ImageConverter {
 			}
 		}
 
-//		dumpConverted(converted);
+		if(dump) {
+			dumpConverted(converted);
+		}
 		return converted;
 	}
 

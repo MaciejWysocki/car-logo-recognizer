@@ -55,8 +55,8 @@ tool.addEventListener("click", function () {
 tool = document.getElementById("tool-eraser");
 tool.addEventListener("click", function () {
     sketcher.clear();
+    updateJudgement([0, 0, 0, 0]);
     drawing = true;
-    timeoutFunction();
 });
 
 let canvas = document.getElementById("canvas");

@@ -20,6 +20,7 @@ public class ExternalImageController {
 	
 	@Autowired
 	private ImageConverter converter;
+	
 	@Autowired
 	private CarLogoRecognizer recognizer;
 

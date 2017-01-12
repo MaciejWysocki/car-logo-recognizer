@@ -12,24 +12,20 @@ import org.neuroph.core.exceptions.VectorSizeMismatchException;
 
 public class NeuralNetworkTest {
 
-	private static final Double MAX_ERROR = 0.2;
-	private static final Double MAX_NETWORK_LEARNING_ERROR = 0.05;
+	private static final Double MAX_ERROR = 0.1;
 	
 	private static CarLogoRecognizer ai;
 	private static ImageConverter converter;
 
 	@BeforeClass
 	public static void setUp() throws VectorSizeMismatchException, IOException, InterruptedException {
-		converter = new ImageConverter();
+		converter = new ImageConverter(false);
 		ai = new CarLogoRecognizer();
-		ai.setConverter(converter);
-		ai.setMaxError(MAX_NETWORK_LEARNING_ERROR);
-		ai.learn();
 	}
-
+	
 	@Test
-	public void shouldRecognizeMerc() throws IOException {
-		BufferedImage image = extracted("/merc.png");
+	public void shouldRecognizeBmw() throws IOException {
+		BufferedImage image = extracted("/bmw.jpg");
 		double[] input = converter.convertToNormalized(image);
 
 		Answer answer = ai.recognizeCarLogo(input);
@@ -55,12 +51,21 @@ public class NeuralNetworkTest {
 	}
 	
 	@Test
-	public void shouldRecognizeBmw() throws IOException {
-		BufferedImage image = extracted("/bmw.jpg");
+	public void shouldRecognizeMerc() throws IOException {
+		BufferedImage image = extracted("/merc.png");
 		double[] input = converter.convertToNormalized(image);
 
 		Answer answer = ai.recognizeCarLogo(input);
 		Assert.assertArrayEquals(new double[]{0, 0, 0, 1}, answer.getData(), MAX_ERROR);
+	}
+	
+	@Test
+	public void shouldNotRecognizeEmpty() throws IOException {
+		BufferedImage image = extracted("/empty.png");
+		double[] input = converter.convertToNormalized(image);
+
+		Answer answer = ai.recognizeCarLogo(input);
+		Assert.assertArrayEquals(new double[]{0, 0, 0, 0}, answer.getData(), MAX_ERROR);
 	}
 
 	private BufferedImage extracted(String fileName) {
