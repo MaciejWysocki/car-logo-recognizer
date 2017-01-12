@@ -9,6 +9,8 @@ Recognition of car logos by neural network.
 mvn install -Dmaven.test.skip
 java -jar target/car-logo-recognizer-1.0-SNAPSHOT.jar
 ```
+And then just go visit [http://localhost:8080/](http://localhost:8080/)
+
 Sometimes requires couple runs as learning process uses random weights and not always is able to learn properly.
 
 # Status
