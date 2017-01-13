@@ -24,3 +24,7 @@ Learning is written in TrainingTool class which is run as a separate program on 
 - More car brands supported
 - More learning samples
 - Code quality refactoring
+
+# Bugs
+
+- Jar does not start when run outside the project folder (probably relative system files have to be changed to classpath resources)
